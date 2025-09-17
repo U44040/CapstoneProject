@@ -1,0 +1,117 @@
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 248, 249, 250;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 33, 37, 41;
+    --background-end-rgb: 52, 58, 64;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+.main {
+  min-height: 100vh;
+}
+
+/* Custom utilities */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+/* Timeline styles */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e9ecef;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #e9ecef;
+}
+
+.timeline-content {
+  padding-left: 15px;
+}
+
+/* Card hover effects */
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+/* Navbar active link */
+.navbar-nav .nav-link.active {
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+}
+
+/* Issue card hover */
+.card.cursor-pointer:hover {
+  transform: translateY(-2px);
+  transition: transform 0.15s ease-in-out;
+}
+
+/* Badge variants */
+.badge.bg-light {
+  color: #495057 !important;
+  border: 1px solid #dee2e6;
+}
+
+/* Stats card styling */
+.stats-card .card-body {
+  padding: 1.5rem;
+}
+
+/* Loading spinner center */
+.d-flex.align-items-center.justify-content-center {
+  min-height: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 20px;
+  }
+  
+  .timeline-marker {
+    left: -15px;
+  }
+  
+  .timeline-content {
+    padding-left: 10px;
+  }
+}
