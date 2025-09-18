@@ -1,4 +1,13 @@
 // Mock data for development and testing
+// 
+// IMPORTANTE: Los nuevos issues creados a través de la interfaz se guardan en localStorage
+// y se combinan automáticamente con estos datos mock. Para ver todos los issues:
+// - Issues mock (predefinidos): se cargan desde este archivo
+// - Issues personalizados: se guardan en localStorage con clave 'customIssues'
+// - La función getAllIssues() en utils.js combina ambos conjuntos de datos
+//
+// Para limpiar issues personalizados, usar: clearCustomIssues() desde utils.js
+// En una aplicación real, esto se reemplazaría con llamadas a API
 import { ISSUE_STATUS, ISSUE_PRIORITY, ISSUE_TYPE } from '../lib/constants';
 
 // Mock users

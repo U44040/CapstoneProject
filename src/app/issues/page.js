@@ -1,13 +1,14 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IssueCard from '../../components/issues/IssueCard';
 import IssueFilters from '../../components/issues/IssueFilters';
+import NewIssueModal from '../../components/issues/NewIssueModal';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import { mockIssues } from '../../data/mockData';
-import { filterIssues, sortIssues } from '../../lib/utils';
+import { filterIssues, sortIssues, getAllIssues } from '../../lib/utils';
 
 export default function IssuesPage() {
-  const [issues] = useState(mockIssues);
+  const [issues, setIssues] = useState(() => getAllIssues(mockIssues));
   const [filters, setFilters] = useState({
     status: 'all',
     priority: 'all',
@@ -18,6 +19,12 @@ export default function IssuesPage() {
   const [sortBy, setSortBy] = useState('updatedAt');
   const [sortOrder, setSortOrder] = useState('desc');
   const [loading] = useState(false);
+  const [showNewIssueModal, setShowNewIssueModal] = useState(false);
+
+  // Reload issues on component mount to get latest data
+  useEffect(() => {
+    setIssues(getAllIssues(mockIssues));
+  }, []);
 
   // Apply filters and sorting
   const filteredIssues = filterIssues(issues, filters);
@@ -35,6 +42,22 @@ export default function IssuesPage() {
   const getSortIcon = (field) => {
     if (sortBy !== field) return 'bi-arrow-down-up';
     return sortOrder === 'asc' ? 'bi-arrow-up' : 'bi-arrow-down';
+  };
+
+  const handleCreateIssue = (newIssue) => {
+    // Add to local state immediately
+    setIssues(prevIssues => [newIssue, ...prevIssues]);
+    
+    // Show success message
+    console.log('✅ Issue creado exitosamente:', newIssue.title);
+  };
+
+  const handleOpenNewIssueModal = () => {
+    setShowNewIssueModal(true);
+  };
+
+  const handleCloseNewIssueModal = () => {
+    setShowNewIssueModal(false);
   };
 
   if (loading) {
@@ -55,7 +78,10 @@ export default function IssuesPage() {
           </p>
         </div>
         <div className="col-auto">
-          <button className="btn btn-primary">
+          <button 
+            className="btn btn-primary"
+            onClick={handleOpenNewIssueModal}
+          >
             <i className="bi bi-plus-circle me-2"></i>
             Nuevo Issue
           </button>
@@ -150,7 +176,10 @@ export default function IssuesPage() {
                     : 'Aún no hay issues creados en el sistema'
                   }
                 </p>
-                <button className="btn btn-primary">
+                <button 
+                  className="btn btn-primary"
+                  onClick={handleOpenNewIssueModal}
+                >
                   <i className="bi bi-plus-circle me-2"></i>
                   Crear primer issue
                 </button>
@@ -181,6 +210,13 @@ export default function IssuesPage() {
           )}
         </div>
       </div>
+
+      {/* New Issue Modal */}
+      <NewIssueModal
+        show={showNewIssueModal}
+        onHide={handleCloseNewIssueModal}
+        onSave={handleCreateIssue}
+      />
     </div>
   );
 }

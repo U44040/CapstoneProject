@@ -105,6 +105,71 @@ export const generateId = () => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
+// Update mockData file with new issue (simulation for development)
+export const updateMockDataWithNewIssue = async (newIssue) => {
+  try {
+    // In a real application, this would be an API call
+    // For development, we'll simulate the update and log it
+    console.log('🔄 Simulando actualización de mockData.js con nuevo issue:', {
+      id: newIssue.id,
+      title: newIssue.title,
+      type: newIssue.type,
+      priority: newIssue.priority,
+      assigneeId: newIssue.assigneeId,
+      projectId: newIssue.projectId,
+      createdAt: newIssue.createdAt
+    });
+
+    // Store in localStorage as a temporary persistence solution
+    const existingIssues = JSON.parse(localStorage.getItem('customIssues') || '[]');
+    const updatedIssues = [newIssue, ...existingIssues];
+    localStorage.setItem('customIssues', JSON.stringify(updatedIssues));
+
+    console.log('✅ Issue guardado en localStorage para persistencia temporal');
+    
+    // In a real app, you would make an API call like:
+    // const response = await fetch('/api/issues', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(newIssue)
+    // });
+    // return response.json();
+
+    return { success: true, issue: newIssue };
+  } catch (error) {
+    console.error('❌ Error al actualizar mockData:', error);
+    throw error;
+  }
+};
+
+// Get issues from localStorage and merge with mockData
+export const getAllIssues = (mockIssues) => {
+  try {
+    const customIssues = JSON.parse(localStorage.getItem('customIssues') || '[]');
+    // Merge custom issues with mock issues, with custom issues first
+    return [...customIssues, ...mockIssues];
+  } catch (error) {
+    console.error('Error al cargar issues personalizados:', error);
+    return mockIssues;
+  }
+};
+
+// Clear custom issues from localStorage (utility function)
+export const clearCustomIssues = () => {
+  localStorage.removeItem('customIssues');
+  console.log('🗑️ Issues personalizados eliminados del localStorage');
+};
+
+// Get only custom issues from localStorage
+export const getCustomIssues = () => {
+  try {
+    return JSON.parse(localStorage.getItem('customIssues') || '[]');
+  } catch (error) {
+    console.error('Error al cargar issues personalizados:', error);
+    return [];
+  }
+};
+
 // Calculate issue statistics
 export const calculateStats = (issues) => {
   const stats = {
