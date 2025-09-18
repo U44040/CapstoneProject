@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getStatusColor, getPriorityColor, getTypeColor, formatRelativeTime } from '../../lib/utils';
 import { mockUsers, mockProjects } from '../../data/mockData';
+import UserAvatar from '../ui/UserAvatar';
 
 export default function IssueCard({ issue, onClick }) {
   const assignee = mockUsers.find(u => u.id === issue.assigneeId);
@@ -49,12 +50,10 @@ export default function IssueCard({ issue, onClick }) {
             <div className="d-flex align-items-center">
               {assignee && (
                 <>
-                  <Image 
-                    src={assignee.avatar} 
-                    alt={assignee.name}
-                    className="rounded-circle me-2"
-                    width={24} 
-                    height={24}
+                  <UserAvatar 
+                    user={assignee}
+                    size="sm"
+                    className="me-2"
                   />
                   <small className="text-muted me-3">{assignee.name}</small>
                 </>

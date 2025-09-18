@@ -1,6 +1,7 @@
 import { mockIssues, mockUsers, mockProjects, mockComments } from '../../../data/mockData';
 import { getStatusColor, getPriorityColor, getTypeColor, formatDate, formatRelativeTime } from '../../../lib/utils';
 import Image from 'next/image';
+import UserAvatar from '../../../components/ui/UserAvatar';
 
 // This would typically come from an API or database
 function getIssue(id) {
@@ -141,12 +142,10 @@ export default function IssueDetailPage({ params }) {
                     return (
                       <div key={comment.id} className="border-bottom pb-3 mb-3">
                         <div className="d-flex align-items-start">
-                          <Image
-                            src={commentUser?.avatar || 'https://via.placeholder.com/40'}
-                            alt={commentUser?.name || 'Usuario'}
-                            width={40}
-                            height={40}
-                            className="rounded-circle me-3"
+                          <UserAvatar
+                            user={commentUser}
+                            size="md"
+                            className="me-3"
                           />
                           <div className="flex-grow-1">
                             <div className="d-flex justify-content-between align-items-center mb-2">
@@ -196,12 +195,10 @@ export default function IssueDetailPage({ params }) {
                 <label className="form-label fw-bold">Asignado a</label>
                 {assignee ? (
                   <div className="d-flex align-items-center">
-                    <Image
-                      src={assignee.avatar}
-                      alt={assignee.name}
-                      width={32}
-                      height={32}
-                      className="rounded-circle me-2"
+                    <UserAvatar
+                      user={assignee}
+                      size="sm"
+                      className="me-2"
                     />
                     <div>
                       <div className="fw-medium">{assignee.name}</div>

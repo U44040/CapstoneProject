@@ -7,28 +7,32 @@ export const mockUsers = [
     id: 1,
     name: 'Juan Pérez',
     email: 'juan.perez@company.com',
-    avatar: 'https://via.placeholder.com/40',
+    initials: 'JP',
+    color: 'primary',
     role: 'developer'
   },
   {
     id: 2,
     name: 'María García',
     email: 'maria.garcia@company.com',
-    avatar: 'https://via.placeholder.com/40',
+    initials: 'MG',
+    color: 'success',
     role: 'designer'
   },
   {
     id: 3,
     name: 'Carlos López',
     email: 'carlos.lopez@company.com',
-    avatar: 'https://via.placeholder.com/40',
+    initials: 'CL',
+    color: 'warning',
     role: 'manager'
   },
   {
     id: 4,
     name: 'Ana Martínez',
     email: 'ana.martinez@company.com',
-    avatar: 'https://via.placeholder.com/40',
+    initials: 'AM',
+    color: 'info',
     role: 'qa'
   }
 ];
