@@ -11,7 +11,7 @@ export default function HomePage() {
               Issue Tracker System
             </h1>
             <p className="lead text-muted mb-4">
-              Sistema modular de seguimiento de problemas para equipos de desarrollo
+              Sistema modular de seguimiento de problemas para equipos de desarrollo 2
             </p>
           </div>
 
